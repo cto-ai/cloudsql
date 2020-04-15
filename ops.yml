@@ -1,0 +1,18 @@
+# for more info visit https://cto.ai/docs/developing-ops/configuring-ops
+version: "1"
+commands:
+  - name: cloudsql:0.1.5
+    public: false
+    description: GCP CloudSQL Op
+    run: /ops/cloudsql
+    remote: true
+    sdk: "2"
+    sourceCodeURL: ""
+    env:
+      - "MY_ENV_VAR=$MY_ENV_VAR"
+      - "MY_ACCESS_TOKEN=$MY_ACCESS_TOKEN"
+    mountCwd: false
+    mountHome: false
+    port:
+      - 3000:3000
+    help:
