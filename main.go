@@ -107,6 +107,9 @@ func promptForAction(ux *ctoai.Ux, prompt *ctoai.Prompt, gcpCloudSQLClient *gcp.
 			ux.Print(fmt.Sprintf("😅  Failed to list CloudSQL instance:\n%+v", err))
 			return false
 		}
+		if output == "" {
+			ux.Print("😅  No existing CloudSQL instances in this project")
+		}
 		ux.Print(output)
 	case Provision:
 		dbname, err := prompt.Input("dbname", "Please enter a name for your database")
