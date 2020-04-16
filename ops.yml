@@ -1,18 +1,24 @@
 # for more info visit https://cto.ai/docs/developing-ops/configuring-ops
 version: "1"
 commands:
-  - name: cloudsql:0.1.5
-    public: false
-    description: GCP CloudSQL Op
+  - name: cloudsql:1.0.0
+    public: true
+    description: An Op that facilitates the management of CloudSQL instances in GCP (Google Cloud Platform)
     run: /ops/cloudsql
     remote: true
     sdk: "2"
-    sourceCodeURL: ""
-    env:
-      - "MY_ENV_VAR=$MY_ENV_VAR"
-      - "MY_ACCESS_TOKEN=$MY_ACCESS_TOKEN"
+    sourceCodeURL: "https://github.com/cto-ai/cloudsql"
     mountCwd: false
     mountHome: false
-    port:
-      - 3000:3000
     help:
+      usage: |-
+        This Op requires a GCP service account with permissions to list, create and delete CloudSQL instances.
+        Generate and download the key, and run `ops secrets:set -k GOOGLE_APPLICATION_CREDENTIALS -v "$(cat <key_file> | tr -d '\n')"` to set it as a secret in your team.
+        
+        Options:
+          * List existing CloudSQL instances and associated information about them
+          * Provision public CloudSQL instances
+          * Clone an existing CloudSQL instances
+          * Delete an existing CloudSQL instance
+      arguments: false
+      options: false
