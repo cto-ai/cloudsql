@@ -17,7 +17,7 @@ FROM registry.cto.ai/official_images/base:2-stretch-slim
 ENV CLOUD_SDK_VERSION=274.0.1
 ENV PATH /usr/local/bin/google-cloud-sdk/bin:$PATH
 
-RUN apt update && apt install -y python-pip curl
+RUN apt update && apt install -y python curl
 
 RUN curl -Os https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz \
   && tar xzf google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz \
@@ -26,7 +26,8 @@ RUN curl -Os https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-c
   && gcloud components install beta --verbosity="error" \
   && cd /usr/local/bin/google-cloud-sdk/bin \
   && gcloud config set core/disable_usage_reporting true \
-  && gcloud config set component_manager/disable_update_check true
+  && gcloud config set component_manager/disable_update_check true \
+  && rm -rf /usr/local/bin/google-cloud-sdk/.install
 
 ENV GOOGLE_APPLICATION_CREDENTIALS="/ops/gcp.json"
 
